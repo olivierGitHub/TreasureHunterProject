@@ -1,7 +1,9 @@
 import com.helpers.FileHandler;
 import com.helpers.JsonBuilder;
+import com.util.entities.Explorer;
 import com.util.entities.GameMap;
 import com.util.dto.GridDto;
+import com.util.enums.ExplorerOrientation;
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class Main {
         fh.setInputFile(outputFile);
         List<GridDto> list = jsonBuilder.generate(fh.justRead());
 
-
-
+        Explorer explorer = new Explorer(ExplorerOrientation.WEST,"3-3");
+        System.out.println(explorer.changePosition(explorer.getPosition()));
     }
 }
