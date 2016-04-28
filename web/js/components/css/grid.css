@@ -1,0 +1,39 @@
+.sameLine{
+    display: inline-block;
+}
+
+.clear {
+    clear : both ;
+}
+
+.blankUnit{
+    height: 4rem;
+    width: 4rem;
+    border: solid;
+    background-color: #D2E0E6;
+    display: inline-block;
+}
+
+.explorerUnit{
+    height: 4rem;
+    width: 4rem;
+    border: solid;
+    background-color: red;
+    display: inline-block;
+}
+
+.mountainUnit{
+    height: 4rem;
+    width: 4rem;
+    border: solid;
+    background-color: #3c510c;
+    display: inline-block;
+}
+
+.treasureUnit{
+    height: 4rem;
+    width: 4rem;
+    border: solid;
+    background-color: blueviolet;
+    display: inline-block;
+}
