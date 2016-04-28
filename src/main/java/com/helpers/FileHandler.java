@@ -24,7 +24,6 @@ public class FileHandler {
     }
 
 
-
     public List<String> justRead(){
 
         BufferedReader br = null;
@@ -71,19 +70,16 @@ public class FileHandler {
 
     public void generateGridFile(List<String> list){
 
-
             BufferedReader br = null;
             String sCurrentLine = null;
 
             try {
                 br = new BufferedReader(new FileReader(this.tempFile));
-                //FileOutputStream os = new FileOutputStream(this.outputFile);
                 PrintWriter writer = new PrintWriter(this.outputFile, "UTF-8");
                 mainloop: while ((sCurrentLine = br.readLine()) != null) {
                     for (String elem : list){
                         String essai = elem.substring(2,5);
                         if (sCurrentLine.equals(essai)){
-                            //sCurrentLine = sCurrentLine.replace(essai,elem);
                             writer.println(elem);
                             continue mainloop;
                         }
@@ -95,9 +91,14 @@ public class FileHandler {
             }catch (IOException ioe) {
                 ioe.printStackTrace();
             }
-
-
     }
+
+
+    public String getOutputFile() {return outputFile;}
+    public void setOutputFile(String outputFile) {this.outputFile = outputFile;}
+
+    public String getInputFile() {return inputFile;}
+    public void setInputFile(String inputFile) {this.inputFile = inputFile;}
 
 
 }

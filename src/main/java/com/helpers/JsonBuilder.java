@@ -23,6 +23,7 @@ public class JsonBuilder {
         this.inputFile = inputFile;
     }
 
+    // DEPRECATED
     public Map<Character,List<String>> transform() {
 
         BufferedReader br = null;
@@ -52,29 +53,25 @@ public class JsonBuilder {
     }
 
 
-    public List<GridDto> generate(List<String> entryList){
+    public List<GridDto> generate(List<String> entryList) {
 
         List<GridDto> finalList = new ArrayList<GridDto>();
-        /*Map<Character,List<String>> resultMap = transform();
 
-        List<String> mountainList = new ArrayList<String>();
-        List<String> treasureList = new ArrayList<String>();
-        List<String> blankList = new ArrayList<String>();
-
-        for (Map.Entry<Character, List<String>> entry : resultMap.entrySet()){
-            if (entry.getKey().equals('M')) {
-                for (String elem : entry.getValue()) {
-                    GridDto gridDto = new GridDto();
-                        gridDto.setPosition(elem.substring(2,5));
-                        gridDto.setTypeUnitGrid("mountainUnit");
-
-                    //finalMap.put('M',)
-                }
+        for (String elem : entryList) {
+            GridDto gridDto = new GridDto();
+            if (elem.charAt(0) == 'M') {
+                gridDto.setPosition(elem.substring(2, 5));
+                gridDto.setTypeUnitGrid("mountainUnit");
+            } else if (elem.charAt(0) == 'T') {
+                gridDto.setPosition(elem.substring(2, 5));
+                gridDto.setTypeUnitGrid("treasureUnit");
+            } else {
+                gridDto.setPosition(elem.substring(0, 3));
+                gridDto.setTypeUnitGrid("blankUnit");
             }
-        }*/
-
-
-        return  finalList;
+            finalList.add(gridDto);
+        }
+        return finalList;
     }
 
 }

@@ -1,5 +1,9 @@
 import com.helpers.FileHandler;
+import com.helpers.JsonBuilder;
 import com.util.GameMap;
+import com.util.GridDto;
+
+import java.util.List;
 
 /**
  * Created by olivier on 28/04/2016.
@@ -13,11 +17,18 @@ public class Main {
 
         FileHandler fh = new FileHandler(inputFile,outputFile);
 
-        //fh.read();
+
         GameMap gameMap = new GameMap(5,6);
         fh.createBlankOutputFile(gameMap);
 
         fh.generateGridFile(fh.justRead());
+
+        JsonBuilder jsonBuilder = new JsonBuilder(outputFile);
+
+        fh.setInputFile(outputFile);
+        List<GridDto> list = jsonBuilder.generate(fh.justRead());
+
+
 
     }
 }
