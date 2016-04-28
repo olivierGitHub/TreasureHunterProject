@@ -1,12 +1,10 @@
 package com.helpers;
 
-import com.util.GameMap;
+import com.util.entities.GameMap;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by olivier on 27/04/2016.
@@ -15,7 +13,7 @@ public class FileHandler {
 
     private String inputFile;
     private String outputFile;
-    private String tempFile = "C:\\Users\\olivier\\IdeaProjects\\TreasureHunterProject\\src\\main\\java\\com\\util\\fichierTexteTemp.txt";
+    private String tempFile = "C:\\Users\\olivier\\IdeaProjects\\TreasureHunterProject\\src\\main\\java\\com\\util\\files\\fichierTexteTemp.txt";
 
 
     public FileHandler(String inputFile, String outputFile){

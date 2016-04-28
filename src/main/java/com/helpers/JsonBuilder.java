@@ -1,8 +1,7 @@
 package com.helpers;
 
-import com.util.GridDto;
+import com.util.dto.GridDto;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.util.Map;
 /**
  * Created by olivier on 27/04/2016.
  */
-@XmlRootElement
+
 public class JsonBuilder {
 
     private String inputFile;
@@ -22,6 +21,28 @@ public class JsonBuilder {
     public JsonBuilder(String inputFile){
         this.inputFile = inputFile;
     }
+
+    public List<GridDto> generate(List<String> entryList) {
+
+        List<GridDto> finalList = new ArrayList<GridDto>();
+
+        for (String elem : entryList) {
+            GridDto gridDto = new GridDto();
+            if (elem.charAt(0) == 'M') {
+                gridDto.setPosition(elem.substring(2, 5));
+                gridDto.setTypeUnitGrid("mountainUnit");
+            } else if (elem.charAt(0) == 'T') {
+                gridDto.setPosition(elem.substring(2, 5));
+                gridDto.setTypeUnitGrid("treasureUnit");
+            } else {
+                gridDto.setPosition(elem.substring(0, 3));
+                gridDto.setTypeUnitGrid("blankUnit");
+            }
+            finalList.add(gridDto);
+        }
+        return finalList;
+    }
+
 
     // DEPRECATED
     public Map<Character,List<String>> transform() {
@@ -50,28 +71,6 @@ public class JsonBuilder {
             ioe.printStackTrace();
         }
         return finalMap;
-    }
-
-
-    public List<GridDto> generate(List<String> entryList) {
-
-        List<GridDto> finalList = new ArrayList<GridDto>();
-
-        for (String elem : entryList) {
-            GridDto gridDto = new GridDto();
-            if (elem.charAt(0) == 'M') {
-                gridDto.setPosition(elem.substring(2, 5));
-                gridDto.setTypeUnitGrid("mountainUnit");
-            } else if (elem.charAt(0) == 'T') {
-                gridDto.setPosition(elem.substring(2, 5));
-                gridDto.setTypeUnitGrid("treasureUnit");
-            } else {
-                gridDto.setPosition(elem.substring(0, 3));
-                gridDto.setTypeUnitGrid("blankUnit");
-            }
-            finalList.add(gridDto);
-        }
-        return finalList;
     }
 
 }

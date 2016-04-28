@@ -1,4 +1,4 @@
-package com.util;
+package com.util.entities;
 
 /**
  * Created by olivier on 28/04/2016.

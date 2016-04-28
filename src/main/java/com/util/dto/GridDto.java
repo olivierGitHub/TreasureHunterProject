@@ -1,8 +1,11 @@
-package com.util;
+package com.util.dto;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by olivier on 27/04/2016.
  */
+@XmlRootElement
 public class GridDto {
 
     private String position;

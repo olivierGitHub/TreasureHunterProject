@@ -1,7 +1,7 @@
 import com.helpers.FileHandler;
 import com.helpers.JsonBuilder;
-import com.util.GameMap;
-import com.util.GridDto;
+import com.util.entities.GameMap;
+import com.util.dto.GridDto;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ public class Main {
 
     public static void main (String[] args ){
 
-        String inputFile ="C:\\Users\\olivier\\IdeaProjects\\TreasureHunterProject\\src\\main\\java\\com\\util\\fichierTexte.txt";
-        String outputFile ="C:\\Users\\olivier\\IdeaProjects\\TreasureHunterProject\\src\\main\\java\\com\\util\\fichierTexteOutput.txt";
+        String inputFile ="C:\\Users\\olivier\\IdeaProjects\\TreasureHunterProject\\src\\main\\java\\com\\util\\files\\fichierTexte.txt";
+        String outputFile ="C:\\Users\\olivier\\IdeaProjects\\TreasureHunterProject\\src\\main\\java\\com\\util\\files\\fichierTexteOutput.txt";
 
         FileHandler fh = new FileHandler(inputFile,outputFile);
 
