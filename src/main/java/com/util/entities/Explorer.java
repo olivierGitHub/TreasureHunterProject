@@ -12,7 +12,7 @@ public class Explorer extends Observable implements Observer {
 
     private ExplorerOrientation orientation;
     private String position;
-    private Integer nbTreasures;
+    private Integer nbTreasures=0;
 
     public Explorer(ExplorerOrientation orientation, String position) {
         this.orientation = orientation;
@@ -26,7 +26,9 @@ public class Explorer extends Observable implements Observer {
                 if (arg.equals(true))
                     goBackToInitialPosition(this.position);
             }
-        }else if (o instanceof Treasure) {
+        }
+
+        if (o instanceof Treasure) {
             if (arg instanceof Boolean) {
                 if (arg.equals(true))
                     pickTreasure();
@@ -39,6 +41,7 @@ public class Explorer extends Observable implements Observer {
     public void pickTreasure(){
         try {
             setNbTreasures(getNbTreasures() + 1);
+            System.out.println("L'explorateur ramasse un trésor, il en possède "+getNbTreasures()+" maintenant.");
             Thread.sleep(1000);
         }catch (InterruptedException e){
             e.printStackTrace();
@@ -58,28 +61,24 @@ public class Explorer extends Observable implements Observer {
                     Thread.sleep(1000);
                     yCoordinate = Integer.parseInt(position.substring(0, 1)) - 1;
                     setPosition(yCoordinate + position.substring(1));
-                    notifyObservers(this.position);
                     break ;
                 }
                 case EAST: {
                     Thread.sleep(1000);
                     xCoordinate = Integer.parseInt(position.substring(2, 3)) + 1;
                     setPosition(position.substring(0, 2) + xCoordinate);
-                    notifyObservers(this.position);
                     break ;
                 }
                 case SOUTH: {
                     Thread.sleep(1000);
                     yCoordinate = Integer.parseInt(position.substring(0, 1)) + 1;
                     setPosition(yCoordinate + position.substring(1));
-                    notifyObservers(this.position);
                     break ;
                 }
                 case WEST: {
                     Thread.sleep(1000);
                     xCoordinate = Integer.parseInt(position.substring(2, 3)) - 1;
                     setPosition(position.substring(0, 2) + xCoordinate);
-                    notifyObservers(this.position);
                     break ;
                 }
                 default:
@@ -87,41 +86,47 @@ public class Explorer extends Observable implements Observer {
                     break ;
             }
         } catch (InterruptedException e) {e.printStackTrace();}
+
+        setChanged();
+        notifyObservers(this.position);
         System.out.println("L'explorateur se trouve à la position "+getPosition()+".");
+
     }
 
 
-    public void goBackToInitialPosition(String position){
+    public void goBackToInitialPosition(String position) {
 
         int xCoordinate = 0;
         int yCoordinate = 0;
         ExplorerOrientation eo = getOrientation();
-
-        switch (eo) {
-            case NORTH: {
-                yCoordinate = Integer.parseInt(position.substring(0, 1)) + 1;
-                setPosition(yCoordinate + position.substring(1));
-                break ;
+        try{
+            switch (eo) {
+                case NORTH: {
+                    yCoordinate = Integer.parseInt(position.substring(0, 1)) + 1;
+                    setPosition(yCoordinate + position.substring(1));
+                    break;
+                }
+                case EAST: {
+                    xCoordinate = Integer.parseInt(position.substring(2, 3)) - 1;
+                    setPosition(position.substring(0, 2) + xCoordinate);
+                    break;
+                }
+                case SOUTH: {
+                    yCoordinate = Integer.parseInt(position.substring(0, 1)) - 1;
+                    setPosition(yCoordinate + position.substring(1));
+                    break;
+                }
+                case WEST: {
+                    xCoordinate = Integer.parseInt(position.substring(2, 3)) + 1;
+                    setPosition(position.substring(0, 2) + xCoordinate);
+                    break;
+                }
+                default:
+                    System.out.println("ERROR: L'explorateur n'a pas changer de position ");
+                    break;
             }
-            case EAST: {
-                xCoordinate = Integer.parseInt(position.substring(2, 3)) - 1;
-                setPosition(position.substring(0, 2) + xCoordinate);
-                break ;
-            }
-            case SOUTH: {
-                yCoordinate = Integer.parseInt(position.substring(0, 1)) - 1;
-                setPosition(yCoordinate + position.substring(1));
-                break ;
-            }
-            case WEST: {
-                xCoordinate = Integer.parseInt(position.substring(2, 3)) + 1;
-                setPosition(position.substring(0, 2) + xCoordinate);
-                break ;
-            }
-            default:
-                System.out.println("ERROR: L'explorateur n'a pas changer de position ");
-                break ;
-        }
+            Thread.sleep(1000);
+        }catch (InterruptedException e){e.printStackTrace();}
         System.out.println("L'explorateur est de retour à la position "+getPosition()+".");
     }
 

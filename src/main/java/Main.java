@@ -3,6 +3,8 @@ import com.helpers.JsonBuilder;
 import com.util.entities.Explorer;
 import com.util.entities.GameMap;
 import com.util.dto.GridDto;
+import com.util.entities.Mountain;
+import com.util.entities.Treasure;
 import com.util.enums.ExplorerOrientation;
 
 import java.util.List;
@@ -30,7 +32,62 @@ public class Main {
         fh.setInputFile(outputFile);
         List<GridDto> list = jsonBuilder.generate(fh.justRead());
 
-        Explorer explorer = new Explorer(ExplorerOrientation.WEST,"3-3");
-        System.out.println(explorer.changePosition(explorer.getPosition()));
+
+        // Test of observer pattern
+        Explorer explorer = new Explorer(ExplorerOrientation.WEST,"3-4");
+
+        Mountain mountain1 = new Mountain("3-2");
+        Treasure treasure1 = new Treasure("3-3", 3);
+
+        explorer.addObserver(mountain1);
+        explorer.addObserver(treasure1);
+        mountain1.addObserver(explorer);
+        treasure1.addObserver(explorer);
+
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("D");
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("D");
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("D");
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("D");
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+
+        if (treasure1.getNbTreasures()==0) explorer.deleteObserver(treasure1);
+
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changeOrientation("G");
+        System.out.println("-----------------------------------------");
+        explorer.changePosition(explorer.getPosition());
+        System.out.println("-----------------------------------------");
+
     }
 }

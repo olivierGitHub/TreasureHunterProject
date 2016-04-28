@@ -23,6 +23,8 @@ public class Treasure extends Observable implements Observer {
             if (arg instanceof String){
                 if (arg.equals(this.position)) {
                     setNbTreasures(getNbTreasures() - 1);
+                    setChanged();
+                    notifyObservers(true);
                     System.out.println("Un trésor a été ramassé à la position " + position + ". Il reste " + nbTreasures + " trésors.");
 
                 }
