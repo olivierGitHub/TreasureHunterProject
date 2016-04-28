@@ -1,54 +1,44 @@
 var React = require('react');
+var Reflux = require('reflux');
 var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var UnitGridGroup = require('./grid/unitGridGroup.js');
 
+var MockData = require('./grid/mockData.js');
+var MapAction = require('../actions/mapActions.js');
+var MapStore = require('../stores/mapStore.js');
+
 
 var Main = React.createClass({
+
+    mixins: [Reflux.connect(MapStore, "store")],
+    getInitialState: function () {
+        MapAction.findGridInformations();
+    },
+
     render: function () {
+        if ( !this.state.store ) {
+            return (
+                <Grid>
+                    <Row>
+                        <Col sm={10} smOffset={1} md={10} mdOffset={1}>
+                            <img className=" loaderGif" src="./images/loading.gif" alt="loading" />
+                        </Col>
+                    </Row>
+                </Grid>
+            )
+        }
 
-        var gridInformation = [
-            {position:'1-1',typeUnitGrid:'blankUnit'},
-            {position:'1-2',typeUnitGrid:'treasureUnit'},
-            {position:'1-3',typeUnitGrid:'mountainUnit'},
-            {position:'1-4',typeUnitGrid:'blankUnit'},
-            {position:'1-5',typeUnitGrid:'blankUnit'},
-            {position:'1-6',typeUnitGrid:'treasureUnit'},
-            {position:'2-1',typeUnitGrid:'blankUnit'},
-            {position:'2-2',typeUnitGrid:'treasureUnit'},
-            {position:'2-3',typeUnitGrid:'blankUnit'},
-            {position:'2-4',typeUnitGrid:'blankUnit'},
-            {position:'2-5',typeUnitGrid:'blankUnit'},
-            {position:'2-6',typeUnitGrid:'blankUnit'},
-            {position:'3-1',typeUnitGrid:'blankUnit'},
-            {position:'3-2',typeUnitGrid:'blankUnit'},
-            {position:'3-3',typeUnitGrid:'mountainUnit'},
-            {position:'3-4',typeUnitGrid:'blankUnit'},
-            {position:'3-5',typeUnitGrid:'blankUnit'},
-            {position:'3-6',typeUnitGrid:'explorerUnit'},
-            {position:'4-1',typeUnitGrid:'blankUnit'},
-            {position:'4-2',typeUnitGrid:'treasureUnit'},
-            {position:'4-3',typeUnitGrid:'mountainUnit'},
-            {position:'4-4',typeUnitGrid:'blankUnit'},
-            {position:'4-5',typeUnitGrid:'blankUnit'},
-            {position:'4-6',typeUnitGrid:'treasureUnit'},
-            {position:'5-1',typeUnitGrid:'blankUnit'},
-            {position:'5-2',typeUnitGrid:'treasureUnit'},
-            {position:'5-3',typeUnitGrid:'blankUnit'},
-            {position:'5-4',typeUnitGrid:'blankUnit'},
-            {position:'5-5',typeUnitGrid:'blankUnit'},
-            {position:'5-6',typeUnitGrid:'blankUnit'}
-        ];
-
+        console.log(this.state.store);
 
         return (
-            <Grid>
-                <Row className="">
+            <Grid className="mainGrid">
+                <Row>
                     <Col sm={10} smOffset={1} md={10} mdOffset={1}>
-                        <h1>MAIN</h1>
-                        <p>enjoy your game, it's just a game</p>
-                        <UnitGridGroup gridInformation={gridInformation} />
+                        <h1>TREASURE HUNTER GAME</h1>
+                        <p className="descriptionGrid">Enjoy your game, but remember the house always win ;-)</p>
+                        <UnitGridGroup gridInformation={this.state.store} />
                     </Col>
                 </Row>
             </Grid>

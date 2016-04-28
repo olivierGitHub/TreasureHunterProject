@@ -16,7 +16,7 @@ var UnitGridGroup = React.createClass({
                         return (
                             <span>
                                 <UnitGrid typeUnitGrid={unitGrid.typeUnitGrid} position={unitGrid.position} key={unitGrid.position} />
-                                <p class="clear"></p>
+                                <p className="clear"></p>
                             </span>
                         )
                     }
