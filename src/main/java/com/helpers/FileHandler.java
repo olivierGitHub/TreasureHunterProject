@@ -4,7 +4,9 @@ import com.util.entities.GameMap;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by olivier on 27/04/2016.
@@ -89,6 +91,35 @@ public class FileHandler {
             }catch (IOException ioe) {
                 ioe.printStackTrace();
             }
+    }
+
+
+    public Map<Character,List<String>> transform() {
+
+        BufferedReader br = null;
+        Map<Character,List<String>> finalMap = new HashMap<Character, List<String>>();
+        finalMap.put('C', new ArrayList<String>());
+        finalMap.put('T', new ArrayList<String>());
+        finalMap.put('M', new ArrayList<String>());
+        finalMap.put('P', new ArrayList<String>());
+        String sCurrentLine = null;
+
+        try {
+            br = new BufferedReader(new FileReader(this.inputFile));
+            Character mapKey;
+            while ((sCurrentLine = br.readLine()) != null) {
+                char elem = sCurrentLine.charAt(1);
+                if (elem==' ') {
+                    mapKey = sCurrentLine.charAt(0);
+                    finalMap.get(mapKey).add(sCurrentLine.substring(2));
+                }else{
+                    finalMap.get('P').add(sCurrentLine);
+                }
+            }
+        }catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return finalMap;
     }
 
 
