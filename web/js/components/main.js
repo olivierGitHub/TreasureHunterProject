@@ -15,6 +15,18 @@ var Main = React.createClass({
     mixins: [Reflux.connect(MapStore, "store")],
     getInitialState: function () {
         MapAction.findGridInformations();
+        return {
+            sequence:''
+        };
+    },
+
+    handleClick:function(event){
+        event.preventDefault();
+        MapAction.playSequence(this.state.sequence);
+        this.setState({sequence: ''});
+    },
+    _onChangeSequence:function(e){
+        this.setState({sequence: e.target.value});
     },
 
     render: function () {
@@ -35,10 +47,22 @@ var Main = React.createClass({
         return (
             <Grid className="mainGrid">
                 <Row>
-                    <Col sm={10} smOffset={1} md={10} mdOffset={1}>
+                    <Col sm={6} smOffset={1} md={6} mdOffset={1}>
                         <h1>TREASURE HUNTER GAME</h1>
                         <p className="descriptionGrid">Enjoy your game, but remember the house always win ;-)</p>
                         <UnitGridGroup gridInformation={this.state.store} />
+                    </Col>
+                    <Col sm={4} smOffset={1} md={4} mdOffset={1}>
+                        <p className="gameInstruction">Type a player (John) sequence</p>
+                        <p>ex: John 2-1 S AADADAGA</p>
+                        <form onSubmit={this.handleClick}>
+                            <input type="text" placeholder="sequence" value={this.state.sequence} onChange={this._onChangeSequence}  />
+                            <button type="submit" >submit</button>
+                        </form>
+                        <p className="gameLegend">Legend: </p>
+                        <p className="colorPlayer">PLAYER</p>
+                        <p className="colorMountain">MOUNTAIN</p>
+                        <p className="colorTreasure">TREASURE</p>
                     </Col>
                 </Row>
             </Grid>

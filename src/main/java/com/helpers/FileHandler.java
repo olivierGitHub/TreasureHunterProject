@@ -78,8 +78,8 @@ public class FileHandler {
                 PrintWriter writer = new PrintWriter(this.outputFile, "UTF-8");
                 mainloop: while ((sCurrentLine = br.readLine()) != null) {
                     for (String elem : list){
-                        String essai = elem.substring(2,5);
-                        if (sCurrentLine.equals(essai)){
+                        String positionBlankFile = elem.substring(2,5);
+                        if (sCurrentLine.equals(positionBlankFile)){
                             writer.println(elem);
                             continue mainloop;
                         }
@@ -120,6 +120,31 @@ public class FileHandler {
             ioe.printStackTrace();
         }
         return finalMap;
+    }
+
+
+    public void updateExplorerPositionInFile(String position, String sequence, String updateFile){
+
+        BufferedReader br = null;
+        String sCurrentLine = null;
+
+        String sequenceUpdated = sequence.substring(0,5) + position + sequence.substring(8);
+
+        try {
+            br = new BufferedReader(new FileReader(this.outputFile));
+            PrintWriter writer = new PrintWriter(updateFile, "UTF-8");
+            mainloop: while ((sCurrentLine = br.readLine()) != null) {
+                if (sCurrentLine.equals(position)){
+                    writer.println(sequenceUpdated);
+                    continue mainloop;
+                }
+                writer.println(sCurrentLine);
+            }
+            br.close();
+            writer.close();
+        }catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
 

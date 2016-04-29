@@ -2,6 +2,7 @@ var Reflux = require('reflux');
 var $ = require('jquery');
 var MapActions = require('../actions/mapActions.js');
 
+
 var results = [];
 
 var MapStore = Reflux.createStore({
@@ -21,8 +22,27 @@ var MapStore = Reflux.createStore({
                     console.log("Result OKK");
                     results = results.concat(data);
                     this.trigger(results);
-                    /*console.log(data);
-                     console.log(results);*/
+                }else{
+                    console.log("Result KO");
+                    console.log(data);
+                }
+            }
+        });
+    },
+    onPlaySequence: function (sequence) {
+        $.ajax({
+            url: 'http://localhost:8080/rest/game/play',
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
+            data: {sequence: sequence},
+            dataType: "json",
+            context:this,
+            success: function(data) {
+                if (data) {
+                    console.log("Result OKK");
+                    results = [];
+                    results = results.concat(data);
+                    this.trigger(results);
                 }else{
                     console.log("Result KO");
                     console.log(data);

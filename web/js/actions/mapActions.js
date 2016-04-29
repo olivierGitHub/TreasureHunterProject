@@ -1,7 +1,8 @@
 var Reflux = require('reflux');
 
 var MapActions = Reflux.createActions([
-    'findGridInformations'
+    'findGridInformations',
+    'playSequence'
 ]);
 
 module.exports = MapActions;

@@ -22,21 +22,10 @@ public class Main {
         FileHandler fh = new FileHandler(inputFile,outputFile);
 
         /*JsonBuilder jsonBuilder = new JsonBuilder(outputFile);
-
         fh.setInputFile(outputFile);
         List<GridDto> list = jsonBuilder.generate(fh.justRead());*/
 
 
-        // Test of observer pattern
-        //Explorer explorer = new Explorer(ExplorerOrientation.WEST,"3-4");
-
-        /*Mountain mountain1 = new Mountain("3-2");
-        Treasure treasure1 = new Treasure("3-3", 3);
-
-        explorer.addObserver(mountain1);
-        explorer.addObserver(treasure1);
-        mountain1.addObserver(explorer);
-        treasure1.addObserver(explorer);*/
 
         List<Mountain> mountainList = new ArrayList<Mountain>();
         List<Treasure> treasureList = new ArrayList<Treasure>();
@@ -99,7 +88,7 @@ public class Main {
             treasure.addObserver(explorer);
         }
 
-        System.out.println(explorer.countObservers());
+        System.out.println("nombre d'observateurs de l'EXPLORER: " +explorer.countObservers());
 
         String sequenceGame = explorer.getSequenceGame();
         char [] chars = sequenceGame.toCharArray();

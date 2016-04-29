@@ -50,3 +50,27 @@
     padding-top: 8rem;
     padding-left: 5rem;
 }
+
+.gameInstruction{
+    padding-top: 10rem;
+    font-weight: bold;
+}
+
+.gameLegend{
+    padding-top: 3rem;
+}
+
+.colorPlayer{
+    color: red;
+    font-weight: bold;
+}
+
+.colorMountain{
+    color: #3c510c;
+    font-weight: bold;
+}
+
+.colorTreasure{
+    color: blueviolet;
+    font-weight: bold;
+}
