@@ -85,25 +85,11 @@ public class GameServices {
                     Treasure treasure = new Treasure(elem.substring(0, 3), nbTreasures);
                     treasureList.add(treasure);
                 }
-            /*else if (entry.getKey().equals('P'))
-                for (String elem : entry.getValue()) {
-                    StringTokenizer st = new StringTokenizer(elem);
-                    try {
-                        String name = st.nextToken();
-                        String position = st.nextToken();
-                        explorer = new Explorer(explorer.transformOrientation(st.nextToken()), position);
-                        explorer.setSequenceGame(st.nextToken());
-                        explorer.setName(name);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }*/
             else if (entry.getKey().equals('C'))
                 for (String elem : entry.getValue()) {
-                    int nbColumns = Integer.parseInt(elem.substring(0, 1));
-                    int nbLines = Integer.parseInt(elem.substring(2, 3));
-                    gameMap = new GameMap(nbLines, nbColumns);
+                    int nbLines = Integer.parseInt(elem.substring(0, 1));
+                    int nbColumns = Integer.parseInt(elem.substring(2, 3));
+                    gameMap = new GameMap(nbColumns,nbLines);
                 }
 
         this.fh.setInputFile(this.inputFile);

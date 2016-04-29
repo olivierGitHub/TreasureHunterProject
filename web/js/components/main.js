@@ -53,8 +53,8 @@ var Main = React.createClass({
                         <UnitGridGroup gridInformation={this.state.store} />
                     </Col>
                     <Col sm={4} smOffset={1} md={4} mdOffset={1}>
-                        <p className="gameInstruction">Type a player (John) sequence</p>
-                        <p>ex: John 2-1 S AADADAGA</p>
+                        <p className="gameInstruction">Type a player (John) sequence here</p>
+                        <p>ex: John 1-1 E AADADAGA</p>
                         <form onSubmit={this.handleClick}>
                             <input type="text" placeholder="sequence" value={this.state.sequence} onChange={this._onChangeSequence}  />
                             <button type="submit" >submit</button>

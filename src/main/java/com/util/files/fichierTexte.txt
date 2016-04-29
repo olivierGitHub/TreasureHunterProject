@@ -1,8 +1,8 @@
 C 5 6
 T 4-2 1
-M 4-3
-M 3-2
+M 4-5
+M 2-2
 T 3-3 3
-John 1-1 S AADADAGA
+John 1-1 E AADADAGA
 T 1-4 3
 M 5-3
