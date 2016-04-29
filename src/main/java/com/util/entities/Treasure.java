@@ -25,7 +25,7 @@ public class Treasure extends Observable implements Observer {
                     setNbTreasures(getNbTreasures() - 1);
                     setChanged();
                     notifyObservers(true);
-                    System.out.println("Un trésor a été ramassé à la position " + position + ". Il reste " + nbTreasures + " trésors.");
+                    System.out.println("Un TRESOR a été ramassé à la position " + position + ". Il reste " + nbTreasures + " trésors.");
 
                 }
             }

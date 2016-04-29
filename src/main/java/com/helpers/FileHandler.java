@@ -112,7 +112,7 @@ public class FileHandler {
                 if (elem==' ') {
                     mapKey = sCurrentLine.charAt(0);
                     finalMap.get(mapKey).add(sCurrentLine.substring(2));
-                }else{
+                }else if (elem != '-'){
                     finalMap.get('P').add(sCurrentLine);
                 }
             }

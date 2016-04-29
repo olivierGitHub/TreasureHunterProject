@@ -20,7 +20,7 @@ public class Mountain extends Observable implements Observer {
         if (o instanceof Explorer) {
             if (arg instanceof String) {
                 if (arg.equals(this.position)) {
-                    System.out.println("Une montagne se trouve à la position " + this.position + ".");
+                    System.out.println("Une MONTAGNE se trouve à la position " + this.position + ".");
                     setChanged();
                     notifyObservers(true);
                 }

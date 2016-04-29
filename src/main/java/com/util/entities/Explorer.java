@@ -13,6 +13,8 @@ public class Explorer extends Observable implements Observer {
     private ExplorerOrientation orientation;
     private String position;
     private Integer nbTreasures=0;
+    private String name;
+    private String sequenceGame;
 
     public Explorer(ExplorerOrientation orientation, String position) {
         this.orientation = orientation;
@@ -26,12 +28,15 @@ public class Explorer extends Observable implements Observer {
                 if (arg.equals(true))
                     goBackToInitialPosition(this.position);
             }
-        }
-
-        if (o instanceof Treasure) {
+        } else if (o instanceof Treasure) {
             if (arg instanceof Boolean) {
                 if (arg.equals(true))
                     pickTreasure();
+            }
+        } else if (o instanceof GameMap) {
+            if (arg instanceof Boolean) {
+                if (arg.equals(true))
+                    goBackToInitialPosition(this.position);
             }
         }
 
@@ -41,7 +46,7 @@ public class Explorer extends Observable implements Observer {
     public void pickTreasure(){
         try {
             setNbTreasures(getNbTreasures() + 1);
-            System.out.println("L'explorateur ramasse un trésor, il en possède "+getNbTreasures()+" maintenant.");
+            System.out.println("L'explorateur ramasse un TRESOR, il en possède "+getNbTreasures()+" maintenant.");
             Thread.sleep(1000);
         }catch (InterruptedException e){
             e.printStackTrace();
@@ -164,6 +169,17 @@ public class Explorer extends Observable implements Observer {
         System.out.println("L'explorateur fait face "+getOrientation()+".");
     }
 
+    public ExplorerOrientation transformOrientation(String orientationFile){
+        char or = orientationFile.charAt(0);
+        switch (or){
+            case 'N': return ExplorerOrientation.NORTH;
+            case 'E': return ExplorerOrientation.EAST;
+            case 'S': return ExplorerOrientation.SOUTH;
+            case 'W': return ExplorerOrientation.WEST;
+            default: return ExplorerOrientation.EAST;
+        }
+    }
+
 
     public String getPosition() {return position;}
     public void setPosition(String position) {this.position = position;}
@@ -173,5 +189,11 @@ public class Explorer extends Observable implements Observer {
 
     public Integer getNbTreasures() {return nbTreasures;}
     public void setNbTreasures(Integer nbTreasures) {this.nbTreasures = nbTreasures;}
+
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+
+    public String getSequenceGame() {return sequenceGame;}
+    public void setSequenceGame(String sequenceGame) {this.sequenceGame = sequenceGame;}
 
 }
